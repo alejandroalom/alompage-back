@@ -11,13 +11,17 @@ export const getAllEducation = async (req, res) => {
 
 export const createEducation = async (req, res) => {
   try {
+    console.log('REQ BODY:', req.body); // ⬅️ AÑADE ESTO
+
     const newEducation = new Education(req.body);
     await newEducation.save();
     res.status(201).json(newEducation);
   } catch (error) {
+    console.error('ERROR:', error); // ⬅️ AÑADE ESTO TAMBIÉN
     res.status(400).json({ error: 'Error al crear la entrada de educación' });
   }
 };
+
 
 export const updateEducation = async (req, res) => {
   try {

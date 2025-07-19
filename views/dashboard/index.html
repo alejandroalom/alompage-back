@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard CV</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <h1>Dashboard CV</h1>
+
+  <div class="navbar">
+    <button onclick="toggleSection('educationSection')">Educación</button>
+    <button onclick="toggleSection('experienceSection')">Experiencia</button>
+    <button onclick="toggleSection('skillsSection')">Skills</button>
+    <button onclick="toggleSection('coursesSection')">Cursos</button>
+    <button onclick="toggleSection('softwareSection')">Software</button>
+    <button onclick="toggleSection('languagesSection')">Idiomas</button>
+    <button onclick="toggleSection('interestsSection')">Datos de Interés</button>
+  </div>
+
+  <section id="educationSection">
+    <input type="text" id="educationTitle" placeholder="Título">
+    <input type="text" id="educationInstitution" placeholder="Institución">
+    <input type="text" id="educationLocation" placeholder="Ubicación">
+    <input type="date" id="educationStartDate">
+    <input type="date" id="educationEndDate">
+    <textarea id="educationDescription" placeholder="Descripción"></textarea>
+    <button onclick="saveEducation()">Guardar</button>
+    <div id="educationList"></div>
+  </section>
+
+  <section id="experienceSection">
+    <input type="text" id="experiencePosition" placeholder="Puesto">
+    <input type="text" id="experienceCompany" placeholder="Empresa">
+    <input type="text" id="experienceLocation" placeholder="Ubicación">
+    <input type="date" id="experienceStartDate">
+    <input type="date" id="experienceEndDate">
+    <textarea id="experienceDescription" placeholder="Descripción"></textarea>
+    <button onclick="saveExperience()">Guardar</button>
+    <div id="experienceList"></div>
+  </section>
+
+  <section id="skillsSection">
+    <textarea id="skillsInput" placeholder="Escribe tus skills separadas por comas"></textarea>
+    <button onclick="saveSkills()">Guardar</button>
+    <div id="skillsList"></div>
+  </section>
+
+  <section id="coursesSection">
+    <input type="text" id="courseName" placeholder="Nombre del curso">
+    <input type="text" id="courseProvider" placeholder="Impartido por">
+    <button onclick="saveCourse()">Guardar</button>
+    <div id="coursesList"></div>
+  </section>
+
+  <section id="softwareSection">
+    <input type="text" id="softwareName" placeholder="Nombre del software">
+    <input type="text" id="softwareLevel" placeholder="Nivel de dominio (opcional)">
+    <button onclick="saveSoftware()">Guardar</button>
+    <div id="softwareList"></div>
+  </section>
+
+  <section id="languagesSection">
+    <input type="text" id="languageName" placeholder="Idioma">
+    <input type="text" id="languageLevel" placeholder="Nivel (opcional)">
+    <button onclick="saveLanguage()">Guardar</button>
+    <div id="languagesList"></div>
+  </section>
+
+  <section id="interestsSection">
+    <textarea id="interestText" placeholder="Escribe algo relevante o personal..."></textarea>
+    <button onclick="saveInterest()">Guardar</button>
+    <div id="interestsList"></div>
+  </section>
+
+  <a href="/">Volver</a>
+  <script src="/dashboard.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
