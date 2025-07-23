@@ -1,4 +1,4 @@
-import Course from '../models/Course.js';
+import Course from '../models/course.js';
 
 export const getAllCourses = async (req, res) => {
   try {
@@ -38,3 +38,6 @@ export const deleteCourse = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el curso' });
   }
 };
+
+
+

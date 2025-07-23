@@ -1,4 +1,4 @@
-import Skill from '../models/Skill.js';
+import Skill from '../models/skill.js';
 
 export const getAllSkills = async (req, res) => {
   try {
@@ -21,9 +21,7 @@ export const createSkill = async (req, res) => {
 
 export const updateSkill = async (req, res) => {
   try {
-    const updated = await Skill.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const updated = await Skill.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updated) return res.status(404).json({ error: 'Skill no encontrada' });
     res.json(updated);
   } catch (error) {
@@ -40,3 +38,5 @@ export const deleteSkill = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar la skill' });
   }
 };
+
+

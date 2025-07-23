@@ -1,49 +1,55 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import cors from 'cors';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import projectRoutes from './routes/projectRoutes.js';
+
 import educationRoutes from './routes/educationRoutes.js';
 import experienceRoutes from './routes/experienceRoutes.js';
 import skillRoutes from './routes/skillRoutes.js';
+import interestRoutes from './routes/interestRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
+import languageRoutes from './routes/languageRoutes.js';
 import softwareRoutes from './routes/softwareRoutes.js';
-import interestRoutes from './routes/interestRoutes.js'; // ✅ NUEVO
+
 
 dotenv.config();
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(cors());
 app.use(express.json());
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+app.use('/education', educationRoutes);
+app.use('/experience', experienceRoutes);
+app.use('/skills', skillRoutes);
+app.use('/interests', interestRoutes);
+app.use('/courses', courseRoutes);
+app.use('/languages', languageRoutes);
+app.use('/software', softwareRoutes);
+
 app.use(express.static(path.join(__dirname, 'views/dashboard')));
 
-app.use('/api/projects', projectRoutes);
-app.use('/api/education', educationRoutes);
-app.use('/api/experience', experienceRoutes);
-app.use('/api/skills', skillRoutes);
-app.use('/api/courses', courseRoutes);
-app.use('/api/software', softwareRoutes);
-app.use('/api/interests', interestRoutes); // ✅ NUEVO
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/dashboard/index.html'));
 });
 
-const PORT = process.env.PORT || 4000;
-const MONGO_URI = process.env.MONGODB_URI;
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('🟢 Conectado a MongoDB'))
+  .catch(err => console.error('🔴 Error al conectar a MongoDB:', err));
 
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`🟢 Servidor escuchando en http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => console.error('🔴 Error al conectar con MongoDB:', err));
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`🟢 Servidor escuchando en http://localhost:${PORT}`);
+});
+
+
+
 

@@ -1,4 +1,4 @@
-import Language from '../models/Language.js';
+import Language from '../models/language.js';
 
 export const getAllLanguages = async (req, res) => {
   try {
@@ -15,28 +15,30 @@ export const createLanguage = async (req, res) => {
     await newLanguage.save();
     res.status(201).json(newLanguage);
   } catch (error) {
-    res.status(400).json({ error: 'Error al crear la entrada de idioma' });
+    res.status(400).json({ error: 'Error al crear el idioma' });
   }
 };
 
 export const updateLanguage = async (req, res) => {
   try {
-    const updated = await Language.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!updated) return res.status(404).json({ error: 'Entrada no encontrada' });
+    const updated = await Language.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updated) return res.status(404).json({ error: 'Idioma no encontrado' });
     res.json(updated);
   } catch (error) {
-    res.status(400).json({ error: 'Error al actualizar la entrada' });
+    res.status(400).json({ error: 'Error al actualizar el idioma' });
   }
 };
 
 export const deleteLanguage = async (req, res) => {
   try {
     const deleted = await Language.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ error: 'Entrada no encontrada' });
-    res.json({ message: 'Entrada eliminada correctamente' });
+    if (!deleted) return res.status(404).json({ error: 'Idioma no encontrado' });
+    res.json({ message: 'Idioma eliminado correctamente' });
   } catch (error) {
-    res.status(500).json({ error: 'Error al eliminar la entrada' });
+    res.status(500).json({ error: 'Error al eliminar el idioma' });
   }
 };
+
+
+
+

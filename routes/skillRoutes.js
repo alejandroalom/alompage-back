@@ -14,3 +14,4 @@ router.put('/:id', updateSkill);
 router.delete('/:id', deleteSkill);
 
 export default router;
+

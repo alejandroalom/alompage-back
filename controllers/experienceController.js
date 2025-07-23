@@ -1,4 +1,4 @@
-import Experience from '../models/Experience.js';
+import Experience from '../models/experience.js';
 
 export const getAllExperience = async (req, res) => {
   try {
@@ -21,9 +21,7 @@ export const createExperience = async (req, res) => {
 
 export const updateExperience = async (req, res) => {
   try {
-    const updated = await Experience.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const updated = await Experience.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updated) return res.status(404).json({ error: 'Entrada no encontrada' });
     res.json(updated);
   } catch (error) {
@@ -40,3 +38,5 @@ export const deleteExperience = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar la entrada' });
   }
 };
+
+

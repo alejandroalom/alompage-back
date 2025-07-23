@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend para el proyecto final de portfolio interactivo",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon index.js"
   },
@@ -19,5 +20,6 @@
     "nodemon": "3.1.0"
   }
 }
+
 
 
