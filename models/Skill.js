@@ -1,10 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const skillSchema = new mongoose.Schema({
-  nombre: { type: String, required: true }
+  name: String
 });
 
-const Skill = mongoose.models.Skill || mongoose.model('Skill', skillSchema);
-
-export default Skill;
-
+module.exports = mongoose.model('Skill', skillSchema);

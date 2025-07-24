@@ -1,13 +1,12 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const experienceSchema = new mongoose.Schema({
-  empresa: { type: String, required: true },
-  puesto: { type: String, required: true },
-  inicio: String,
-  fin: String,
-  descripcion: String
+  position: String,
+  company: String,
+  location: String,
+  startDate: String,
+  endDate: String,
+  description: String
 });
 
-const Experience = mongoose.model('Experience', experienceSchema);
-
-export default Experience;
+module.exports = mongoose.model('Experience', experienceSchema);

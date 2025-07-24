@@ -1,19 +1,9 @@
-import express from 'express';
-import {
-  getAllEducation,
-  createEducation,
-  updateEducation,
-  deleteEducation
-} from '../controllers/educationController.js';
-
+const express = require('express');
 const router = express.Router();
+const controller = require('../controllers/educationController');
 
-router.get('/', getAllEducation);
-router.post('/', createEducation);
-router.put('/:id', updateEducation);
-router.delete('/:id', deleteEducation);
+router.post('/', controller.createEducation);
+router.get('/', controller.getEducation);
+router.delete('/:id', controller.deleteEducation); // <- añadido
 
-export default router;
-
-
-
+module.exports = router;

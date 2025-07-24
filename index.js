@@ -1,54 +1,47 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-
-import educationRoutes from './routes/educationRoutes.js';
-import experienceRoutes from './routes/experienceRoutes.js';
-import skillRoutes from './routes/skillRoutes.js';
-import interestRoutes from './routes/interestRoutes.js';
-import courseRoutes from './routes/courseRoutes.js';
-import languageRoutes from './routes/languageRoutes.js';
-import softwareRoutes from './routes/softwareRoutes.js';
-
-
-dotenv.config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
+require('dotenv').config();
 
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const PORT = process.env.PORT || 4000;
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/education', educationRoutes);
-app.use('/experience', experienceRoutes);
-app.use('/skills', skillRoutes);
-app.use('/interests', interestRoutes);
-app.use('/courses', courseRoutes);
-app.use('/languages', languageRoutes);
-app.use('/software', softwareRoutes);
+// Rutas estáticas para scripts y estilos
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(path.join(__dirname, 'views/dashboard')));
+// Rutas API
+app.use('/education', require('./routes/educationRoutes'));
+app.use('/experience', require('./routes/experienceRoutes'));
+app.use('/skill', require('./routes/skillRoutes'));
+app.use('/course', require('./routes/courseRoutes'));
+app.use('/language', require('./routes/languageRoutes'));
+app.use('/software', require('./routes/softwareRoutes'));
+app.use('/interest', require('./routes/interestRoutes'));
 
-
-
+// Redirección por defecto al dashboard
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/dashboard/index.html'));
 });
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('🟢 Conectado a MongoDB'))
-  .catch(err => console.error('🔴 Error al conectar a MongoDB:', err));
+// Conexión a MongoDB
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('Conectado a MongoDB');
+    app.listen(PORT, () => {
+      console.log(`Servidor escuchando en http://localhost:${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('Error conectando a MongoDB:', err);
+  });
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`🟢 Servidor escuchando en http://localhost:${PORT}`);
-});
 
 
 

@@ -1,41 +1,21 @@
-import Software from '../models/software.js';
+const Software = require('../models/software');
 
-export const getAllSoftware = async (req, res) => {
-  try {
-    const software = await Software.find();
-    res.json(software);
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener el software' });
-  }
+exports.createSoftware = async (req, res) => {
+  const software = new Software(req.body);
+  await software.save();
+  res.status(201).json(software);
 };
 
-export const createSoftware = async (req, res) => {
-  try {
-    const newSoftware = new Software(req.body);
-    await newSoftware.save();
-    res.status(201).json(newSoftware);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al crear el software' });
-  }
+exports.getSoftware = async (req, res) => {
+  const softwares = await Software.find();
+  res.json(softwares);
 };
 
-export const updateSoftware = async (req, res) => {
+exports.deleteSoftware = async (req, res) => {
   try {
-    const updated = await Software.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) return res.status(404).json({ error: 'Software no encontrado' });
-    res.json(updated);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al actualizar el software' });
+    await Software.findByIdAndDelete(req.params.id);
+    res.status(204).send();
+  } catch (err) {
+    res.status(500).json({ error: 'Error al borrar software' });
   }
 };
-
-export const deleteSoftware = async (req, res) => {
-  try {
-    const deleted = await Software.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ error: 'Software no encontrado' });
-    res.json({ message: 'Software eliminado correctamente' });
-  } catch (error) {
-    res.status(500).json({ error: 'Error al eliminar el software' });
-  }
-};
-

@@ -1,18 +1,10 @@
-import express from 'express';
-import {
-  getAllLanguages,
-  createLanguage,
-  updateLanguage,
-  deleteLanguage
-} from '../controllers/languageController.js';
-
+const express = require('express');
 const router = express.Router();
+const controller = require('../controllers/languageController');
 
-router.get('/', getAllLanguages);
-router.post('/', createLanguage);
-router.put('/:id', updateLanguage);
-router.delete('/:id', deleteLanguage);
+router.post('/', controller.createLanguage);
+router.get('/', controller.getLanguages);
+router.delete('/:id', controller.deleteLanguage); // ← añadido
 
-export default router;
-
+module.exports = router;
 

@@ -1,10 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const softwareSchema = new mongoose.Schema({
-  nombre: { type: String, required: true }
+  name: String
 });
 
-const Software = mongoose.model('Software', softwareSchema);
-
-export default Software;
-
+module.exports = mongoose.model('Software', softwareSchema);

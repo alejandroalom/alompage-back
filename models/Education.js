@@ -1,13 +1,12 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const educationSchema = new mongoose.Schema({
-  institucion: { type: String, required: true },
-  titulo: { type: String, required: true },
-  inicio: String,
-  fin: String
+  title: String,
+  institution: String,
+  location: String,
+  startDate: String,
+  endDate: String,
+  description: String
 });
 
-const Education = mongoose.model('Education', educationSchema);
-
-export default Education;
-
+module.exports = mongoose.model('Education', educationSchema);

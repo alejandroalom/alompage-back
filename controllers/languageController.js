@@ -1,44 +1,22 @@
-import Language from '../models/language.js';
+const Language = require('../models/language');
 
-export const getAllLanguages = async (req, res) => {
-  try {
-    const languages = await Language.find();
-    res.json(languages);
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener los idiomas' });
-  }
+exports.createLanguage = async (req, res) => {
+  const language = new Language(req.body);
+  await language.save();
+  res.status(201).json(language);
 };
 
-export const createLanguage = async (req, res) => {
-  try {
-    const newLanguage = new Language(req.body);
-    await newLanguage.save();
-    res.status(201).json(newLanguage);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al crear el idioma' });
-  }
+exports.getLanguages = async (req, res) => {
+  const languages = await Language.find();
+  res.json(languages);
 };
 
-export const updateLanguage = async (req, res) => {
+exports.deleteLanguage = async (req, res) => {
   try {
-    const updated = await Language.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) return res.status(404).json({ error: 'Idioma no encontrado' });
-    res.json(updated);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al actualizar el idioma' });
+    await Language.findByIdAndDelete(req.params.id);
+    res.status(204).send();
+  } catch (err) {
+    res.status(500).json({ error: 'Error al borrar idioma' });
   }
 };
-
-export const deleteLanguage = async (req, res) => {
-  try {
-    const deleted = await Language.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ error: 'Idioma no encontrado' });
-    res.json({ message: 'Idioma eliminado correctamente' });
-  } catch (error) {
-    res.status(500).json({ error: 'Error al eliminar el idioma' });
-  }
-};
-
-
-
 

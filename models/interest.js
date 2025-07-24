@@ -1,9 +1,8 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const interestSchema = new mongoose.Schema({
-  nombre: { type: String, required: true }
+  text: String
 });
 
-const Interest = mongoose.model('Interest', interestSchema);
+module.exports = mongoose.model('Interest', interestSchema);
 
-export default Interest;

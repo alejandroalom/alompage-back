@@ -1,17 +1,10 @@
-import express from 'express';
-import {
-  getAllSoftware,
-  createSoftware,
-  updateSoftware,
-  deleteSoftware
-} from '../controllers/softwareController.js';
-
+const express = require('express');
 const router = express.Router();
+const controller = require('../controllers/softwareController');
 
-router.get('/', getAllSoftware);
-router.post('/', createSoftware);
-router.put('/:id', updateSoftware);
-router.delete('/:id', deleteSoftware);
+router.post('/', controller.createSoftware);
+router.get('/', controller.getSoftware);
+router.delete('/:id', controller.deleteSoftware); // ← añadido
 
-export default router;
+module.exports = router;
 

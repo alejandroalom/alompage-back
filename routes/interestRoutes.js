@@ -1,16 +1,10 @@
-import express from 'express';
-import {
-  getAllInterests,
-  createInterest,
-  updateInterest,
-  deleteInterest
-} from '../controllers/interestController.js';
-
+const express = require('express');
 const router = express.Router();
+const controller = require('../controllers/interestController');
 
-router.get('/', getAllInterests);
-router.post('/', createInterest);
-router.put('/:id', updateInterest);
-router.delete('/:id', deleteInterest);
+router.post('/', controller.createInterest);
+router.get('/', controller.getInterest);
+router.delete('/:id', controller.deleteInterest); // ← añadido
 
-export default router;
+module.exports = router;
+
