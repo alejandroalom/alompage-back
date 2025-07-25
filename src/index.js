@@ -26,7 +26,7 @@ app.use('/interest', require('./routes/interestRoutes'));
 
 // Redirección por defecto al dashboard
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/dashboard/index.html'));
+  res.sendFile(path.join(__dirname, 'dashboard/index.html'));
 });
 
 // Conexión a MongoDB
