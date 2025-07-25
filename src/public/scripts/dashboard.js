@@ -87,7 +87,7 @@ async function deleteEducation(id) {
 // EXPERIENCE
 async function saveExperience() {
   const data = {
-    role: document.getElementById('experienceRole').value,
+    position: document.getElementById('experiencePosition').value,
     company: document.getElementById('experienceCompany').value,
     location: document.getElementById('experienceLocation').value,
     startDate: document.getElementById('experienceStartDate').value,
@@ -108,7 +108,7 @@ async function loadExperience() {
   const section = document.getElementById('experience');
   section.innerHTML = `
     <form onsubmit="event.preventDefault(); saveExperience();">
-      <input id="experienceRole" placeholder="Puesto" />
+      <input id="experiencePosition" placeholder="Puesto" />
       <input id="experienceCompany" placeholder="Empresa" />
       <input id="experienceLocation" placeholder="Ubicación" />
       <input id="experienceStartDate" placeholder="Inicio" />
@@ -125,7 +125,7 @@ async function loadExperience() {
   list.innerHTML = data.map((item) => `
     <div class="card">
       <span class="delete" onclick="deleteExperience('${item._id}')">x</span>
-      <strong>${item.role}</strong> - ${item.company}<br>
+      <strong>${item.position}</strong> - ${item.company}<br>
       ${item.location}<br>
       ${item.startDate} - ${item.endDate}<br>
       <p>${item.description}</p>
